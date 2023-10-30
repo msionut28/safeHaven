@@ -1,5 +1,5 @@
 //styles
-import './globals.css'
+import '../styles/global.css'
 import { Rubik } from 'next/font/google'
 
 //components
