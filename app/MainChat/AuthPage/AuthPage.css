@@ -1,0 +1,85 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Libre+Baskerville:ital@1&family=Russo+One&family=Skranji:wght@700&display=swap');
+body {
+  background-image: url('https://t4.ftcdn.net/jpg/04/93/70/73/240_F_493707399_EqlZkAcNT4Hli5yE28d5T4eoPH2OVtgJ.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  margin: 0px;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.form-card {
+  width: 50%;
+  max-width: 350px;
+  padding: 0% 25% 0% 25%;
+  margin: 0 auto;
+  
+}
+
+.form-title { 
+  font-size: 42px; 
+  font-family: 'Russo One';
+  font-weight: normal; 
+  letter-spacing: 0.8px; 
+  color: #3e3b3b;
+  padding-bottom: 12px; 
+}
+
+.form-subtitle {
+  font-size: 18px;
+  font-family: 'Avenir'; 
+  letter-spacing: 0.5px;
+  padding-bottom: 24px;
+  margin: 0 auto
+}
+
+.auth {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding-bottom: 12px;
+}
+.auth-label {
+  position: absolute;
+  top: 8px;
+  left: 18px;
+  font-size: 11px;
+  color: linear-gradient(to bottom, red 0% 14%, orange 14% 28%, yellow 28% 42%, green 42% 56%, blue 56% 70%, indigo 70% 84%, violet 84% 98%);
+  font-family: Avenir;
+  width: 100px;
+}
+.auth-input {
+  background-color: linear-gradient(to bottom, red 0% 14%, orange 14% 28%, yellow 28% 42%, green 42% 56%, blue 56% 70%, indigo 70% 84%, violet 84% 98%);;
+  color: linear-gradient(to bottom, red 0% 14%, orange 14% 28%, yellow 28% 42%, green 42% 56%, blue 56% 70%, indigo 70% 84%, violet 84% 98%);;
+  font-family: "Avenir";
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 24px 18px 12px 18px;
+  width: calc(100% - 18px - 18px);
+  margin-bottom: 12px;
+  border-bottom: 3px solid linear-gradient(to bottom, red 0% 14%, orange 14% 28%, yellow 28% 42%, green 42% 56%, blue 56% 70%, indigo 70% 84%, violet 84% 98%);;
+}
+.auth-button {
+  width: 100%;
+  height: 53px;
+  color: linear-gradient(to bottom, red 0% 14%, orange 14% 28%, yellow 28% 42%, green 42% 56%, blue 56% 70%, indigo 70% 84%, violet 84% 98%);
+  background-color: #4A90E2; /* Blue from the rainbow */
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  font-family: "Avenir";
+  cursor: pointer;
+  transition: all .44s ease;
+  -webkit-transition: all .44s ease;
+  -moz-transition: all .44s ease;
+}
+.auth-button:hover { filter: brightness(145%); }

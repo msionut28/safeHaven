@@ -7,8 +7,8 @@ export default function Venues() {
   return (
     <>
       <h1>venues</h1>
-      <Link href="/details">Find out more about this venue</Link>
-      <Link href="/reviews">Review A Venue</Link>
+      <Link href="/venues/details">Find out more about this venue</Link>
+      <Link href="/venues/reviews">Review A Venue</Link>
       </>
   );
 }
