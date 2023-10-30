@@ -10,6 +10,7 @@ export default function Navbar() {
     <Link href="/events">Events</Link>
     <Link href="/map">Map</Link>
     <Link href="/venues">What's on?</Link>
+    <Link href="/remembering-ezzy">Rememberance</Link>
   </nav>
   )
 }
