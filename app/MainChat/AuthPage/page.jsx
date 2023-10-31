@@ -1,10 +1,12 @@
 'use client'
-import "./AuthPage.css"
+
+import styles from "./AuthPage.module.css"
 
 const AuthPage = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target[0];
+    console.log(value);
 
     fetch("http://localhost:4000/authenticate", {
       method: "POST",
@@ -24,21 +26,23 @@ const AuthPage = (props) => {
   };
 
   return (
-    <div className="background">
-      <form onSubmit={onSubmit} className="form-card">
-        <div className="form-title">SafeHaven</div>
+    <div className={styles.body}>
+    <div className={styles.background}>
+      <form onSubmit={onSubmit} className={styles.formCard}>
+        <div className={styles.formTitle}>SafeHaven</div>
 
-        <div className="form-subtitle">Join The Community</div>
+        <div className={styles.formSubtitle}>Join The Community</div>
 
-        <div className="auth">
-          <div className="auth-label">Username</div>
-          <input className="auth-input" name="username" />
-          <button className="auth-button" type="submit">
+        <div className={styles.auth}>
+          <div className={styles.authLabel}>Username</div>
+          <input className={styles.authInput} name="username"/>
+          <button className={styles.authButton} type="submit">
             Enter
           </button>
+          
         </div>
       </form>
-      
+      </div>
     </div>
   );
 };
