@@ -2,7 +2,9 @@
 const nextConfig = {
     env: {
         GOOGLE_PLACES_API_KEY: process.env.GOOGLE_PLACES_API_KEY,
-        CONSUMER_KEY: process.env.CONSUMER_KEY
+        CONSUMER_KEY: process.env.CONSUMER_KEY,
+        GITHUB_ID: process.env.GITHUB_ID ,
+        GITHUB_SECRET: process.env.GITHUB_SECRET,
     },
     // {
     // },
