@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
-        GOOGLE_PLACES_API_KEY: process.env.GOOGLE_PLACES_API_KEY
+        GOOGLE_PLACES_API_KEY: process.env.GOOGLE_PLACES_API_KEY,
+        CONSUMER_KEY: process.env.CONSUMER_KEY
     },
     // {
-    //     CONSUMER_KEY: process.env.CONSUMER_KEY
     // },
     //     async headers() {
     //     return [
