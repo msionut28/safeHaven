@@ -1,7 +1,27 @@
+'use client'
 import React from 'react'
 import Link from "next/link"
 import styles from './Navbar.module.css'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
+function AuthButton (){
+  const { data: session } = useSession();
+  
+  if(session) {
+    return (
+      <>
+      {session?.user?.name} <br />
+      <button onClick={()=> signOut()}>Sign Out</button>
+      </>
+    );
+  }
+  return (
+    <>
+  Not signed in <br />
+  <button onClick={()=> signIn()}>Sign In</button>
+  </>
+)
+}
 export default function Navbar() {
   return (
     <nav className={styles.navbar}>
@@ -13,6 +33,7 @@ export default function Navbar() {
         <Link href="/map">Map</Link>
         <Link href="/venues">What's on?</Link>
         <Link href="/remembering-ezzy">Rememberance</Link>
+        <AuthButton />
       </div>
     </nav>
   )
