@@ -74,10 +74,23 @@ export default function Events() {
     else console.log(`NOT CHECKED, ${checked[category]}`);
   }
 
+    function searchBar (searchterm) {
+      setSearchTerm(searchterm)
+      console.log(searchterm);
+    }
+
+    function handleSubmit () {
+      const keyWord = searchTerm.split(' ').join('')
+      console.log(keyWord)
+      const newApiURL = `https://app.ticketmaster.com/discovery/v2/events.json?countryCode=GB&keyword=${keyWord}&size=30&apikey=${apiKey}`
+      setApiUrl(newApiURL)
+      console.log(newApiURL);
+    }
+
   return (
     <>
       <div className="container mx-auto m-10">
-        <SearchBar props={{ placeholder: 'Search event by name...', buttonText: 'SEARCH' }} />
+        <SearchBar props={{ placeholder: 'Search event by name...', buttonText: 'SEARCH', onSearch: searchBar, onClick: handleSubmit }} />
         <div className="items-top flex space-x-2 m-5">
           <CheckBox
             id="sports"
