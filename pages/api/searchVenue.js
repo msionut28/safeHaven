@@ -1,7 +1,3 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
-
 export default async function handler(req, res) {
   console.log("searching from searchVenue.js")
   const { query } = req.query;
