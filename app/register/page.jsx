@@ -1,6 +1,8 @@
 'use client'
 
-import { Icons } from "@/components/ui/icons"
+import { useState } from "react"
+// import { useRouter } from "next/router"
+// import { Icons } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -13,9 +15,58 @@ import {
   CardTitle
 } from "@/components/ui/card"
 
-export default function WOOOS() {
+export default function RegisterUser() {
+  const [username, setUsername] = useState(undefined)
+  const [password, setPassword] = useState(undefined)
+  const [passwordConfirm, setPasswordConfirm] = useState(undefined)
+  const [spacebar, setSpacebar] = useState(false)
+  const [passwordsMatch, setPasswordsMatch] = useState(true)
+  const backend = process.env.BACKEND_URL
+
+
+  function preventSpaceBar(e) {
+    if(e.key === " "){
+      e.preventDefault()
+      setSpacebar(true)
+      console.log('spacebar pressed');
+    }else setSpacebar(false)
+  }
+
+  function handleInputChange(e, setter){
+    const newInput = e.target.value
+    password !== passwordConfirm ? setPasswordsMatch(false) : setPasswordsMatch(true)
+    setter(newInput)
+  }
+
+  async function accountCreate () {
+    try {
+      if(username && password && passwordConfirm && passwordConfirm === password){
+        const response = await fetch(`${backend}/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password
+          })
+        })
+        
+        if(response.ok) {
+          console.log('ACCOUNT CREATED');
+          // const router = useRouter()
+          // router.push('/')
+        } else {
+          console.error('FAILED TO CREATE ACCOUNT')
+        }
+      }
+    } catch(error) {
+      console.error(`ERROR CREATING ACCOUNT: ${error}`)
+    }
+  }
   return (
-    <div className="w-1/2 flex c">
+  <div className="py-50">
+    <div className="flex items-center justify-center">
     <Card>
       <CardHeader className="space-y-1">
         <CardTitle className="text-2x1">
@@ -33,18 +84,41 @@ export default function WOOOS() {
         </div>
         <div className="grid gap-2 mt-2">
           <Label htmlFor="username">Username</Label>
-          <Input id="username" type="text" placeholder="Enter your username"/>
+          <Input 
+          id="username" 
+          type="text" 
+          placeholder="Enter your username"
+          value={username}
+          onChange={(e) => handleInputChange(e, setUsername)}
+          onKeyDown={(e) => preventSpaceBar(e)}/>
+          {spacebar ? (
+            <Label>SPACES NOT ALLOWED</Label>
+          ) : (<></>)}
         </div>
         <div className="grid gap-2 mt-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" placeholder="Enter your password"/>
+          <Input 
+          id="password" 
+          type="password" 
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => handleInputChange(e, setPassword)}/>
         </div>
         <div className="grid gap-2 mt-2">
           <Label htmlFor="passwordconfirm">Confirm your password</Label>
-          <Input id="passwordconfirm" type="password" placeholder="Confirm your password"/>
+          <Input 
+          id="passwordconfirm" 
+          type="password" 
+          placeholder="Confirm your password"
+          value={passwordConfirm}
+          onChange={(e) => handleInputChange(e, setPasswordConfirm)}/>
         </div>
-        <Button className="w-full mt-3">CREATE ACCOUNT</Button>
-        <div className="relative">
+        {passwordsMatch ? <></> : (
+          <Label>PASSWORDS DO NOT MATCH. PLEASE TRY AGAIN!</Label>
+        )}
+        <Button className="w-full mt-3" type="submit" onClick={accountCreate}>CREATE ACCOUNT</Button>
+        </CardContent>
+        {/* <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t" />
           </div>
@@ -66,8 +140,9 @@ export default function WOOOS() {
             Google
           </Button>
         </div>
-      </CardFooter>
+      </CardFooter>*/}
     </Card>
     </div>
+  </div>
   )
 }

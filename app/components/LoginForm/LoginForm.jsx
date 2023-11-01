@@ -13,7 +13,7 @@ import {
     SheetTitle,
   } from "@/components/ui/sheet"
 import { useState } from "react"
-
+ 
 function AuthButton (){
   return (
     <SheetTrigger asChild> 
@@ -23,10 +23,25 @@ function AuthButton (){
 }
 
 export default function LoginForm() {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
+
   const [showPassword, setShowPassword] = useState(false)
+  const [username, setUsername] = useState(undefined)
+  const [password, setPassword] = useState(undefined)
+
+  function handleInputChange(e, setter){
+    const newInput = e.target.value
+    console.log(newInput);
+    // password !== passwordConfirm ? setPasswordsMatch(false) : setPasswordsMatch(true)
+    setter(newInput)
+  }
+
   function togglePasswordVisibility() {
     setShowPassword(!showPassword)
+  }
+
+  async function handleLogin(){
+    const backendUrl = process.env.BACKEND_URL
   }
 
   return (
@@ -46,14 +61,21 @@ export default function LoginForm() {
             <Label htmlFor="name" className="text-right">
                 Username
             </Label>
-            <Input id="name"className="col-span-3" placeholder="Insert your username..." />
+            <Input 
+            id="name"
+            className="col-span-3" 
+            placeholder="Insert your username..." 
+            onChange={(e) => handleInputChange(e, setUsername)}/>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="password" className="text-right">
                 Password
             </Label>
             <div className="col-span-3 flex">
-            <Input type={showPassword ? 'text' : 'password'}  placeholder="Insert your password..." />
+            <Input 
+            type={showPassword ? 'text' : 'password'}  
+            placeholder="Insert your password..." 
+            onChange={(e) => handleInputChange(e, setPassword)}/>
               {showPassword ? (
                 <Icons.eyeOff className="h-6 w-6 flex center mt-2 ml-2 cursor-pointer" onClick={togglePasswordVisibility}/>
               ) : (
