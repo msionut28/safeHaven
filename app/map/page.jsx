@@ -16,7 +16,7 @@ export default function Map() {
   function onMapClick(e) {
     setPosition(e.latlng.toString())
    }
-   map.on('click', onMapClick);
+  //  map.on('click', onMapClick);
 
   const customIcon = new Icon ({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/4171/4171097.png",
