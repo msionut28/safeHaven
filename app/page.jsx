@@ -1,5 +1,7 @@
 'use client'
 import React, { useState } from 'react';
+import MapComponent from './components/MapComponent.jsx';
+import AddReview from './reviews/page.jsx'
 
 export default function Home() {
   const [query, setQuery] = useState('');
@@ -8,7 +10,7 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [selectedVenue, setSelectedVenue] = useState(null);
   const [reviews, setReviews] = useState([]);
-
+  const [markers, setMarkers] = useState([]);
 
   const handleSearch = async () => {
     console.log("doing da search");
@@ -20,6 +22,16 @@ export default function Home() {
       if (res.ok) {
         const data = await res.json();
         setResults(data.predictions);
+
+        // make results into markers
+        const newMarkers = data.predictions.map((result) => ({
+          position: {
+            lat: result.geometry.location.lat,
+            lng: result.geometry.location.lng,
+          },
+          venue: result.description,
+        }));
+        setMarkers(newMarkers);
       } else {
         const data = await res.json();
         setError(data.error || 'Error');
@@ -46,6 +58,10 @@ export default function Home() {
     fetchReviews(venue);
   };
 
+  const handleMarkerClick = (marker) => {
+    setSelectedVenue(marker.venue);
+    fetchReviews(marker.venue);
+  };
   return (
     <>
       <main>
@@ -82,8 +98,20 @@ export default function Home() {
                 <p>{review.review}</p>
               </div>
             ))}
+            <AddReview venue={selectedVenue} />
           </div>
         )}
+
+      </div>
+      <div>
+        <MapComponent
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+          defaultCenter={{ lat: -34.397, lng: 150.644 }}
+          defaultZoom={8}
+          markers={markers}
+          onMarkerClick={handleMarkerClick}
+        />
       </div>
     </>
   );
