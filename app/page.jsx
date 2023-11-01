@@ -1,7 +1,8 @@
 'use client'
 import React, { useState } from 'react';
 import MapComponent from './components/MapComponent.jsx';
-import AddReview from './reviews/page.jsx'
+import AddReview from './reviews/page.jsx';
+import styles from './home.module.css';
 
 export default function Home() {
   const [query, setQuery] = useState('');
@@ -103,15 +104,16 @@ export default function Home() {
         )}
 
       </div>
-      <div>
+      <div className={styles.mapContainer}>
         <MapComponent
-          containerElement={<div style={{ height: `400px` }} />}
+          containerElement={<div style={{ height: `400px`, backgroundColor: 'red' }} />}
           mapElement={<div style={{ height: `100%` }} />}
           defaultCenter={{ lat: -34.397, lng: 150.644 }}
           defaultZoom={8}
           markers={markers}
           onMarkerClick={handleMarkerClick}
         />
+
       </div>
     </>
   );
