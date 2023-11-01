@@ -7,15 +7,15 @@ import styles from './Navbar.module.css'
 import LoginForm from './LoginForm/LoginForm'
 import { Button } from '@/components/ui/button'
 
-// function AuthButton (){
-//   const { data: session } = useSession();
+function AuthButton (){
+  const { data: session } = useSession();
   
-//   // if(session) {
-//   //   return (
-//   //     <Button variant="outline">PROFILE</Button>
-//   //   );
-//   // }
-// }
+  if(session) {
+    return (
+      <Button variant="outline">PROFILE</Button>
+    );
+  }
+}
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [userName, setUserName] = useState('TESTING ')
@@ -26,10 +26,10 @@ export default function Navbar() {
         <Link href="/">About Us</Link>
         <Link href="/MainChat">Community Chats</Link>
         <Link href="/events">Events</Link>
-        <Link href="/venues">What's on?</Link>
+        <Link href="/map">Map</Link>
         <Link href="/toilets">Toilets</Link>
         <Link href="/news">News</Link>
-        {/* <AuthButton /> */}
+        <AuthButton />
         {loggedIn ? userName : <LoginForm /> }
       </div>
     </nav>
