@@ -5,7 +5,7 @@ import { Rubik } from 'next/font/google'
 //components
 import Navbar from "./components/Navbar"
 import  SessionProvider from "./components/SessionProvider"
-import { GetServerSession, getServerSession } from 'next-auth'
+import {  getServerSession } from 'next-auth'
 
 const rubik = Rubik({subsets: ['latin']})
 
