@@ -1,4 +1,3 @@
-// CheckBox.js (Child Component)
 import { Checkbox } from "@/components/ui/checkbox";
 
 export default function CheckBox({ id, description, checked, onChange }) {

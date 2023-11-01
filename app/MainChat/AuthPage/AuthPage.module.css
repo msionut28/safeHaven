@@ -17,8 +17,8 @@
 }
 
 .formCard {
-  width: 500%;
-  max-width: 350px;
+  width: 75%;
+  /* max-width: 350px; */
   padding: 0% 25% 0% 25%;
   margin: 0 auto;
   
@@ -64,7 +64,7 @@
   border: none;
   border-radius: 8px;
   padding: 24px 18px 12px 18px;
-  width: calc(100% - 18px - 18px);
+  width: 100%;
   margin-bottom: 12px;
   border-bottom: 3px solid linear-gradient(to bottom, red 0% 14%, orange 14% 28%, yellow 28% 42%, green 42% 56%, blue 56% 70%, indigo 70% 84%, violet 84% 98%);;
 }

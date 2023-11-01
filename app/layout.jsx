@@ -20,12 +20,12 @@ export default async function RootLayout({
  return (
     <html lang="en">
       <body className={rubik.className}>
-        <SessionProvider session={session}>
-        <main>
-        <Navbar />
-      {children}
-        </main>
-        </SessionProvider>
+          <SessionProvider session={session}>
+            <main>
+              <Navbar />
+              {children}
+            </main>
+          </SessionProvider>
       </body>
     </html>
   )
