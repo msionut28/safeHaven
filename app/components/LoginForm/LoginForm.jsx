@@ -30,7 +30,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState(undefined)
 
   function handleInputChange(e, setter){
-    const newInput = e.target.value
+    const newInput = e.target.value 
     console.log(newInput);
     // password !== passwordConfirm ? setPasswordsMatch(false) : setPasswordsMatch(true)
     setter(newInput)
@@ -40,16 +40,29 @@ export default function LoginForm() {
     setShowPassword(!showPassword)
   }
 
-  async function handleLogin(){
-    const backendUrl = process.env.BACKEND_URL
+  async function handleLogin() {
+    try {
+      const response = await signIn('credentials', {
+        username,
+        password,
+      });
+
+      if (response?.error) {
+        console.error(response.error);
+      } else {
+        console.log('Logged in successfullyyy');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
-    <Sheet>
+    <Sheet> 
           {session
           ?<Button variant="outline" onClick={()=> signOut()}>SIGN OUT</Button> : <AuthButton />
           }
-        <SheetContent>
+        <SheetContent side="left">
         <SheetHeader>
             <SheetTitle>LOG IN </SheetTitle>
             <SheetDescription>
@@ -85,7 +98,7 @@ export default function LoginForm() {
             </div>
         </div>
         <SheetFooter>
-            <Button type="submit" className="m-auto">LOG IN</Button>
+            <Button type="submit" className="m-auto"onClick={handleLogin}>LOG IN</Button>
         </SheetFooter>
         <div className="relative mt-5">
           <div className="absolute inset-0 flex items-center">
