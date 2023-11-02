@@ -11,6 +11,7 @@ const nextConfig = {
         NEXTAUTH_URL: process.env.NEXTAUTH_URL,
         BACKEND_URL: process.env.BACKEND_URL
     },
+    reactStrictMode: false,
     // {
     // },
     //     async headers() {

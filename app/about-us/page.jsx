@@ -19,7 +19,7 @@ export default function AboutUs() {
           This app is dedicated to Ezra Jackson, who was the inspiration for setting up this platform. Ezra was a passionate advocate for making the world a better place and was deeply committed to environmental causes.
         </p>
         <p className={styles.dedicationText}>
-          Ezra's family has set up a forest donation page, as Ezra was very passionate about saving the environment. You can contribute to their memory by donating to their grove: <a href='https://treesforlife.org.uk/groves/g8898/' target='_blank' rel='noopener noreferrer' className={styles.donationLink}>Dedicated to Ezra - Our very own Eco-Warrior</a>.
+          Ezra's family ask that anyone who is struggling, please, reach out. It is important to remember that you are not alone and that you are loved, even if its hard to feel it sometimes. The MIND charity has fantastic resources for those who might need it. Ezra's family has also set up a forest donation page, as Ezra was very passionate about saving the environment. You can contribute to their memory by donating to their grove: <a href='https://treesforlife.org.uk/groves/g8898/' target='_blank' rel='noopener noreferrer' className={styles.donationLink}>Dedicated to Ezra - Our very own Eco-Warrior</a>.
         </p>
       </div>
     
