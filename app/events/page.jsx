@@ -5,6 +5,7 @@ import levenshtein from "fast-levenshtein";
 import { useState, useEffect } from "react";
 import CheckBox from "../components/CheckBox/CheckBox";
 import SearchBar from "../components/SearchBar/SearchBar";
+import { useSession } from "next-auth/react";
 
 const EventCard = dynamic(() => import('../components/EventCard/EventCard'));
 const apiKey = process.env.CONSUMER_KEY;
@@ -14,6 +15,8 @@ export default function Events() {
   const [apiUrl, setApiUrl] = useState(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=UK&size=1&apikey=${apiKey}`);
   const [checked, setChecked] = useState({})
   const [searchTerm, setSearchTerm] = useState('')
+  const data = useSession()
+  console.log(data);
 
   useEffect(() => {
 

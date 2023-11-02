@@ -3,6 +3,10 @@
 import { useState } from "react"
 // import { useRouter } from "next/router"
 // import { Icons } from "@/components/ui/icons"
+import { useRouter } from "next/router"
+import Router from "next/router"
+import { useSession } from "next-auth/react"
+import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -21,6 +25,7 @@ export default function RegisterUser() {
   const [passwordConfirm, setPasswordConfirm] = useState(undefined)
   const [spacebar, setSpacebar] = useState(false)
   const [passwordsMatch, setPasswordsMatch] = useState(true)
+  const [accountCreated, setAccountCreated] = useState(false)
   const backend = process.env.BACKEND_URL
 
 
@@ -48,12 +53,13 @@ export default function RegisterUser() {
           },
           body: JSON.stringify({
             username: username,
-            password: password
+            password: password 
           })
         })
         
         if(response.ok) {
           console.log('ACCOUNT CREATED');
+          setAccountCreated(true)
           // const router = useRouter()
           // router.push('/')
         } else {
@@ -64,6 +70,14 @@ export default function RegisterUser() {
       console.error(`ERROR CREATING ACCOUNT: ${error}`)
     }
   }
+  // console.log(session);
+  useEffect(() => {
+    const Router = useRouter()
+    if (typeof window !== "undefined"){
+      if (accountCreated) Router.replace("/events")
+    }
+  }, [accountCreated])
+  // if (status === 'unauthenticated')
   return (
   <div className="py-50">
     <div className="flex items-center justify-center">
