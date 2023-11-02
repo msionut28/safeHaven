@@ -1,0 +1,87 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  .aboutUs {
+    width: 5%;
+    margin-left: 20%;
+  }
+  
+  .title, .subtitle, .paragraph, .list, .dedication {
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .subtitle {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .paragraph {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .list {
+    list-style-type: disc;
+    margin-left: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .dedication {
+    width: 150%; 
+    background: linear-gradient(to bottom, #fff000 0%, #ffffff 40%, #9c59d1 70%, #000000 100%);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dedicationText {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .donationLink {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold; 
+  }
+  
+  .donationLink:hover {
+    text-decoration: underline;
+    color: #005fa3; 
+  }
+  
+  .ezraPhoto {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .donationLink {
+    color: #0077cc;
+    text-decoration: none;
+  }
+  
+  .donationLink:hover {
+    text-decoration: underline;
+  }
+  

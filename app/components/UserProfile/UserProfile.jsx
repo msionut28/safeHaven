@@ -137,7 +137,8 @@ export default function UserProfile({user}) {
                         value={data.aboutYourself}
                         disabled={true}/>
                 }
-            </div>{
+            </div>
+            {/* {
                data.reviews.length?
                 <div>
                     <Label>Thanks for contributing to our community. You currently have:</Label>
@@ -147,7 +148,7 @@ export default function UserProfile({user}) {
                     </ul>
                 </div>
                 :<></>
-            }
+            } */}
             <div className="grid grid-cols-4 items-center gap-4">
                 <div className="col-span-3 flex">
                 </div>

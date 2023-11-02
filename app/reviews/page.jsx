@@ -23,49 +23,73 @@ function AddReview({ venue }) {
         const { name, value } = e.target;
         const updatedValue = name === 'isUniversity' ? e.target.checked : value;
         setReview(prevState => ({ ...prevState, [name]: updatedValue }));
+        console.log(review)
     };
 
-    const handleSubmit = () => {
-        fetch(`http://localhost:4000/AddReview`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(review),
-        })
-        .then(res => {
-            console.log(res.status);
-            setReview({
-                venue: '',
-                review: '',
-                inclusivity: '',
-                safety: '',
-                date: '',
-                isUniversity: false,
-                support: '',
-                community: ''
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch(`http://localhost:4000/AddReview`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(review),
             });
-        })
-        .catch(err => setError(err.message));
+
+            if (res.status === 200) {
+                // Handle success
+                alert("Review submitted successfully!");
+                
+                // Call the onReviewSubmit function with the newly submitted review
+                onReviewSubmit(review);
+
+                // Reset the form
+                setReview({
+                    venue: '',
+                    review: '',
+                    inclusivity: '',
+                    safety: '',
+                    date: '',
+                    isUniversity: false,
+                    support: '',
+                    community: ''
+                });
+            } else {
+                alert(`Error submitting review: ${res.status}`);
+            }
+        } catch (err) {
+            setError(err.message);
+            alert(`Error submitting review: ${err.message}`);
+        }
     };
+
 
     return (
         <div className={styles.container}>
-            <input 
+            <label htmlFor="venue">Venue</label>
+            <input
+                id="venue"
                 name="venue"
                 value={review.venue}
                 onChange={handleChange}
                 placeholder="Venue"
                 className={styles.inputField}
             />
-            <textarea 
+
+            <label htmlFor="reviewText">Review</label>
+            <textarea
+                id="reviewText"
                 name="review"
                 value={review.review}
                 onChange={handleChange}
                 placeholder='Review this venue'
                 className={styles.textAreaField}
             ></textarea>
-            <input 
+
+            <label htmlFor="inclusivity">Inclusivity</label>
+            <input
+                id="inclusivity"
                 name="inclusivity"
                 type="number"
                 min="1"
@@ -73,8 +97,12 @@ function AddReview({ venue }) {
                 onChange={handleChange}
                 placeholder='Inclusivity'
                 className={styles.inputField}
+                value={review.inclusivity}
             />
-            <input 
+
+            <label htmlFor="safety">Safety</label>
+            <input
+                id="safety"
                 name="safety"
                 type="number"
                 min="1"
@@ -82,25 +110,33 @@ function AddReview({ venue }) {
                 onChange={handleChange}
                 placeholder='Safety'
                 className={styles.inputField}
+                value={review.safety}
             />
-            <input 
+
+            <label htmlFor="date">Date</label>
+            <input
+                id="date"
                 name="date"
                 type="date"
                 onChange={handleChange}
-                placeholder='Date'
                 className={styles.inputField}
+                value={review.date}
             />
-            <input 
+
+            <label htmlFor="isUniversity">Is this a University?</label>
+            <input
+                id="isUniversity"
                 type="checkbox"
                 name="isUniversity"
                 checked={review.isUniversity}
                 onChange={handleChange}
             />
-            <label>Is this a University?</label>
 
             {review.isUniversity && (
                 <>
-                    <input 
+                    <label htmlFor="support">Support</label>
+                    <input
+                        id="support"
                         name="support"
                         type="number"
                         min="1"
@@ -108,8 +144,12 @@ function AddReview({ venue }) {
                         onChange={handleChange}
                         placeholder='Support'
                         className={styles.inputField}
+                        value={review.support}
                     />
-                    <input 
+
+                    <label htmlFor="community">Community</label>
+                    <input
+                        id="community"
                         name="community"
                         type="number"
                         min="1"
@@ -117,6 +157,7 @@ function AddReview({ venue }) {
                         onChange={handleChange}
                         placeholder='Community'
                         className={styles.inputField}
+                        value={review.community}
                     />
                 </>
             )}
