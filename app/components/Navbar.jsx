@@ -21,10 +21,10 @@ export default function Navbar() {
   const [userName, setUserName] = useState('TESTING ')
   return (
     <nav className={styles.navbar}>
-      <Link href="/about-us"><h1 className={styles.logo}>SafeHaven</h1></Link>
+      <Link href="/"><h1 className={styles.logo}>SafeHaven</h1></Link>
       <div className={styles.links}>
-        <Link href="/">About Us</Link>
-        <Link href="/MainChat">Community Chats</Link>
+        <Link href="/about-us">About Us</Link>
+        <Link href="/MainChat"> Chats</Link>
         <Link href="/events">Events</Link>
         <Link href="/map">Map</Link>
         <Link href="/toilets">Toilets</Link>

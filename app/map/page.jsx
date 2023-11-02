@@ -1,51 +1,88 @@
 "use client"
-import React from "react";
-import { useState } from "react";
+
+import React, { useState } from "react";
 import styles from "./map.module.css";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents
+} from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import {Icon} from "leaflet"
-import MarkerClusterGroup from "react-leaflet-cluster"
+import MarkerClusterGroup from "react-leaflet-cluster";
 
+const customIcon = new L.Icon({
+  iconUrl: "https://cdn-icons-png.flaticon.com/128/4171/4171097.png",
+  iconSize: [38, 38]
+});
 
-export default function Map() {
-  const [markers, setMarkers] = useState([])
-  const [position, setPosition] = useState(undefined)
-  const [comment, setComment] = useState(undefined)
-  
-  function onMapClick(e) {
-    setPosition(e.latlng.toString())
-   }
-   map.on('click', onMapClick);
+function LocationMarkers() {
+  const [markers, setMarkers] = useState([]);
 
-  const customIcon = new Icon ({
-    iconUrl: "https://cdn-icons-png.flaticon.com/128/4171/4171097.png",
-    iconSize: [38,38]
-  })
+  useMapEvents({
+    click: (e) => {
+      const newMarker = {
+        id: Date.now(),
+        position: e.latlng,
+        text: "" 
+      };
+      setMarkers((markers) => [...markers, newMarker]);
+    }
+  });
 
+  const handleInputChange = (e, id) => {
+    const updatedMarkers = markers.map((marker) => {
+      if (marker.id === id) {
+        return { ...marker, text: e.target.value };
+      }
+      return marker;
+    });
+    setMarkers(updatedMarkers);
+  };
 
+  const handleInputSubmit = (id) => {
+    
+    const markerText = markers.find((marker) => marker.id === id).text;
+    console.log(`Marker ${id} text saved: ${markerText}`);
+    
+  };
 
   return (
-    
-    <div className={styles.body}>
-      <div className={styles.container}>
-        <MapContainer style={{
-                height: '100vh',
-                width: '100vw'
-            }}  center={[51.505, -0.09]} zoom={13} >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <MarkerClusterGroup>
-          {markers.map(marker => (
-            <Marker position={marker.geocode} icon={customIcon}>
-              <Popup>{marker.popUp}</Popup>
-            </Marker>
-          ))}
-        </MarkerClusterGroup>
-        </MapContainer>
-      </div>
-    </div>
+    <>
+      <MarkerClusterGroup>
+        {markers.map((marker) => (
+          <Marker key={marker.id} position={marker.position} icon={customIcon}>
+            <Popup>
+              <textarea
+                value={marker.text}
+                onChange={(e) => handleInputChange(e, marker.id)}
+                placeholder="Enter your text here"
+              />
+              <button onClick={() => handleInputSubmit(marker.id)}>
+                Submit
+              </button>
+            </Popup>
+          </Marker>
+        ))}
+      </MarkerClusterGroup>
+    </>
+  );
+}
+
+export default function LeafletMap() {
+  return (
+    <MapContainer
+      center={[51.505, -0.09]}
+      zoom={13}
+      style={{ height: "100vh", width: "100%" }}
+    >
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <LocationMarkers />
+    </MapContainer>
   );
 }
