@@ -3,7 +3,7 @@
 import { useState } from "react"
 // import { useRouter } from "next/router"
 // import { Icons } from "@/components/ui/icons"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import Router from "next/router"
 import { useSession } from "next-auth/react"
 import { useEffect } from "react"
@@ -72,9 +72,9 @@ export default function RegisterUser() {
   }
   // console.log(session);
   useEffect(() => {
-    const Router = useRouter()
+    const router = useRouter()
     if (typeof window !== "undefined"){
-      if (accountCreated) Router.replace("/events")
+      if (accountCreated) router.replace("/events")
     }
   }, [accountCreated])
   // if (status === 'unauthenticated')

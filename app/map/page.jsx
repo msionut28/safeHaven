@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./map.module.css";
 import {
   MapContainer,
@@ -42,12 +42,67 @@ function LocationMarkers() {
     setMarkers(updatedMarkers);
   };
 
-  const handleInputSubmit = (id) => {
-    
-    const markerText = markers.find((marker) => marker.id === id).text;
+  useEffect(() => {
+    async function fetchMarkers() {
+      try {
+        const response = await fetch('http://localhost:4000/markers');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const markersData = await response.json();
+        console.log(markersData);
+        setMarkers(markersData);
+      } catch (error) {
+        console.error('Failed to fetch markers:', error);
+      }
+    }
+
+    fetchMarkers();
+  }, []);
+
+  const  handleInputSubmit = async (id) => {
+    const markerText = markers.find((marker) => marker.id === id);
     console.log(`Marker ${id} text saved: ${markerText}`);
-    
+
+    try {
+      const response = await fetch('http://localhost:4000/markers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          position: markerText.position,
+          text: markerText.text,
+        }),
+      });
+  
+      if (response.ok) {
+        console.log('Marker data saved to database:', await response.json());
+      } else {
+        throw new Error('Something went wrong with the POST request');
+      }
+    } catch (error) {
+      console.error('Error saving marker:', error);
+    }
   };
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:4000/markers/${id}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+       
+        setMarkers(markers.filter((marker) => marker._id !== _id));
+        console.log('Marker deleted from database and state:', await response.json());
+      } else {
+        throw new Error('Something went wrong with the DELETE request');
+      }
+    } catch (error) {
+      console.error('Error deleting marker:', error);
+    }
+  };
+  
 
   return (
     <>
@@ -63,6 +118,7 @@ function LocationMarkers() {
               <button onClick={() => handleInputSubmit(marker.id)}>
                 Submit
               </button>
+              <button onClick={() => handleDelete(marker._id)}>Delete</button>
             </Popup>
           </Marker>
         ))}
@@ -73,6 +129,8 @@ function LocationMarkers() {
 
 export default function LeafletMap() {
   return (
+    <>
+     <h1 className={styles.header}>Share Memory or experience</h1>
     <MapContainer
       center={[51.505, -0.09]}
       zoom={13}
@@ -84,5 +142,6 @@ export default function LeafletMap() {
       />
       <LocationMarkers />
     </MapContainer>
+    </>
   );
 }
