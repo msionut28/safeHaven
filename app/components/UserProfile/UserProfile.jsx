@@ -45,6 +45,7 @@ export default function UserProfile({user}) {
         setter(newInput)
     }
     async function getData(){
+        console.log('user profile', user);
         if(user.id){
             const id = user.id
             const response = await fetch(`${backendURL}/user/${id}`, {
@@ -61,7 +62,7 @@ export default function UserProfile({user}) {
                 console.error(error)
             }
             console.log(data);
-        }
+        } else console.log(user);
     }
   return (
     // <div>

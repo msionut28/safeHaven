@@ -126,7 +126,7 @@ export default function LoginForm() {
           </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-background px-2 text-muted-foreground">
-              You don't have an account yet?
+            You don&apos;t have an account yet?
             </span>
           </div>
         </div>
