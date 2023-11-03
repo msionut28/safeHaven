@@ -39,11 +39,9 @@ export const authOptions = {
                         const userData = await response.json()
                         if (userData) {
                              user = {
-                                username: userData.userData.username,
-                                memberSince: userData.userData.memberSince,
                                 id: userData.userData.id
                             }
-                            console.log(user);
+                            console.log('userid: ',user);
                             return {
                                 status: "SUCCESS",
                                 data: user
@@ -59,9 +57,8 @@ export const authOptions = {
         })
     ], callbacks: {
         session: async ({session}) => {
+            console.log(user);
             session.user = {
-                username: user.username,
-                memberSince: user.memberSince,
                 id: user.id
             }
             return Promise.resolve(session)

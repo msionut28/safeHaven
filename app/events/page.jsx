@@ -12,7 +12,7 @@ const apiKey = process.env.CONSUMER_KEY;
 
 export default function Events() {
   const [events, setEvents] = useState([]);
-  const [apiUrl, setApiUrl] = useState(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=UK&size=1&apikey=${apiKey}`);
+  const [apiUrl, setApiUrl] = useState(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=UK&size=20&apikey=${apiKey}`);
   const [checked, setChecked] = useState({})
   const [searchTerm, setSearchTerm] = useState('')
   const data = useSession()
