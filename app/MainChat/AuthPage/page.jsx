@@ -3,12 +3,13 @@
 import styles from "./AuthPage.module.css"
 
 const AuthPage = (props) => {
+  const backendURL = process.env.BACKEND_URL
   const onSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target[0];
     console.log(value);
 
-    fetch("http://localhost:4000/authenticate", {
+    fetch(`${backendURL}/authenticate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
