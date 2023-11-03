@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import styles from './reviews.module.css'
 
 function AddReview({ venue }) {
@@ -162,9 +163,9 @@ function AddReview({ venue }) {
                 </>
             )}
 
-            <button onClick={handleSubmit} className={styles.submitButton}>
+            <Button onClick={handleSubmit} className={styles.submitButton}>
                 Submit Review
-            </button>
+            </Button>
         </div>
     );
 }

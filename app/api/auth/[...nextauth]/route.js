@@ -57,10 +57,11 @@ export const authOptions = {
         })
     ], callbacks: {
         session: async ({session}) => {
-            console.log(user);
+            console.log("inside the callback", user);
             session.user = {
                 id: user.id
             }
+            console.log(session.user)
             return Promise.resolve(session)
         }
     } 

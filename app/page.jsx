@@ -1,10 +1,13 @@
 'use client'
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import MapComponent from './components/MapComponent.jsx';
 import AddReview from './reviews/page.jsx';
 import styles from './home.module.css';
 import StarComponent from './components/StarComponent.jsx'
+import SearchBar from './components/SearchBar/SearchBar.jsx'
+import { Label } from '@/components/ui/label.jsx';
+import { Button } from '@/components/ui/button.jsx';
 
 const render = (status, markers, handleMarkerClick, center, zoom) => {
   switch (status) {
@@ -21,7 +24,7 @@ export default function Home() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const [selectedVenue, setSelectedVenue] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [markers, setMarkers] = useState([]);
@@ -33,7 +36,6 @@ export default function Home() {
 
   const handleSearch = async () => {
     setLoading(true);
-    setError(null);
 
     try {
       const res = await fetch(`/api/searchVenue?query=${query}`);
@@ -55,10 +57,13 @@ export default function Home() {
         setMarkers(newMarkers);
       } else {
         const data = await res.json();
-        setError(data.error || 'Error');
+        setError(true);
+        console.log(error);
       }
     } catch (err) {
-      setError('Failed to fetch data');
+      if(err){
+        console.error(error)
+      }
     } finally {
       setLoading(false);
     }
@@ -140,9 +145,10 @@ export default function Home() {
 
         <div className="leftSection">
           <div className={styles.searchContainer}>
-            <h1>Search for a Venue or University</h1>
+            <Label forhtml="searchbar" className="mr-2">Search for a Venue or University</Label>
             <div>
-              <input
+              <SearchBar id="searchbar" props={{placeholder: 'Venue or University...', buttonText: 'Search', onSearch: setQuery, onClick: handleSearch}}/>
+              {/* <input
                 className={styles.searchInput}
                 type="text"
                 placeholder="Venue or University..."
@@ -155,10 +161,9 @@ export default function Home() {
                 disabled={loading}
               >
                 Search
-              </button>
+              </button> */}
             </div>
             {loading && <p>Loading...</p>}
-            {error && <p>Error: {error}</p>}
             <ul className={styles.resultsList}>
               {results.map((result) => (
                 <li
@@ -212,17 +217,23 @@ export default function Home() {
                 )}
 
                 <h2 className={styles.reviewTitle}>Reviews for {selectedVenue}</h2>
-                {reviews.length > 0 ? (
-                  reviews.map((review, index) => (
-                    <div className={styles.reviewItem} key={index}>
-                      <p>{review.review} - Date: {formatDate(review.date)}</p>
-                    </div>
-                  ))
-                ) : (
-                  <p>No reviews yet.</p>
-                )}
+                <div className='justify-center m-auto'>
+                  {reviews.length > 0 ? (
+                    reviews.map((review, index) => (
+                      <div className={styles.reviewItem} key={index}>
+                        <p>{review.review} - Date: {formatDate(review.date)}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No reviews yet.</p>
+                  )}
+                </div>
 
-                <button className={styles.reviewButton} onClick={() => setShowReviewForm(!showReviewForm)}>Add Your Own Review</button>
+                <Button 
+                className={styles.reviewButton}
+                 onClick={() => setShowReviewForm(!showReviewForm)}>
+                  Add Your Own Review
+                </Button>
                 {showReviewForm && <AddReview venue={selectedVenue} onReviewSubmit={onReviewSubmit} />}
               </div>
             )}
