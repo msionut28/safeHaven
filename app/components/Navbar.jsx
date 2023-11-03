@@ -1,6 +1,4 @@
 'use client'
-
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from "next/link";
@@ -10,12 +8,7 @@ import UserProfile from './UserProfile/UserProfile';
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState('TESTING');
-  const router = useRouter();
   const { data: session } = useSession();
-
-  function gotoEvents() {
-    router.push('/events');
-  }
 
   return (
     <nav className="bg-tomato p-5 flex justify-between items-center shadow-md">
