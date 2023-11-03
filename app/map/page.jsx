@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-//import styles from "./map.module.css";
 import {
   MapContainer,
   TileLayer,
@@ -12,6 +11,7 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from "react-leaflet-cluster";
+
 
 const customIcon = new L.Icon({
   iconUrl: "https://cdn-icons-png.flaticon.com/128/4171/4171097.png",
@@ -130,7 +130,7 @@ function LocationMarkers() {
 export default function LeafletMap() {
   return (
     <>
-     <h1 className={styles.header}>Share Memory or experience</h1>
+{/*      <h1>Share Memory or experience</h1> */}
     <MapContainer
       center={[51.505, -0.09]}
       zoom={13}
