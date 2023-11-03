@@ -1,14 +1,15 @@
-'use client'
+"use client"
 import React, { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import styles from './reviews.module.css'
 
-function AddReview({ venue }) {
+const AddReview = (props) => {
     const [review, setReview] = useState({
         venue: '',
         review: '',
         inclusivity: '',
         safety: '',
-        date: '',
+        date: '', 
         isUniversity: false,
         support: '',
         community: ''
@@ -17,7 +18,7 @@ function AddReview({ venue }) {
 
     useEffect(() => {
         setReview(prevState => ({ ...prevState, venue }));
-    }, [venue]);
+    }, [props.venue]); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -38,10 +39,10 @@ function AddReview({ venue }) {
             });
 
             if (res.status === 200) {
-                // Handle success
+               
                 alert("Review submitted successfully!");
                 
-                // Call the onReviewSubmit function with the newly submitted review
+                
                 onReviewSubmit(review);
 
                 // Reset the form
@@ -162,11 +163,11 @@ function AddReview({ venue }) {
                 </>
             )}
 
-            <button onClick={handleSubmit} className={styles.submitButton}>
+            <Button onClick={handleSubmit} className={styles.submitButton}>
                 Submit Review
-            </button>
+            </Button>
         </div>
     );
 }
 
-export default AddReview;
+export default AddReview

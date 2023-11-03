@@ -1,0 +1,46 @@
+.ratingContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+}
+
+.ratingNumber {
+    font-size: 18px;
+    margin-right: 8px; 
+}
+
+.starContainer {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.fullStar, .fractionalStar {
+    width: 20px;
+    height: 20px;
+    
+}
+.fractionalStarOverlay {
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+.starWrapper {
+    position: relative;
+    overflow: hidden;
+    width: 20px;
+}
+.greyStarWrapper {
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+}
+
+
+.fractionalStar {
+    position: absolute;
+    left: 0;
+    transform: translateX(-100%);
+}

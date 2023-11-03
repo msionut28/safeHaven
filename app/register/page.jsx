@@ -3,8 +3,7 @@
 import { useState } from "react"
 // import { useRouter } from "next/router"
 // import { Icons } from "@/components/ui/icons"
-import { useRouter } from "next/navigation"
-import Router from "next/router"
+import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -27,7 +26,7 @@ export default function RegisterUser() {
   const [passwordsMatch, setPasswordsMatch] = useState(true)
   const [accountCreated, setAccountCreated] = useState(false)
   const backend = process.env.BACKEND_URL
-
+  const router = useRouter()
 
   function preventSpaceBar(e) {
     if(e.key === " "){
@@ -72,7 +71,6 @@ export default function RegisterUser() {
   }
   // console.log(session);
   useEffect(() => {
-    const router = useRouter()
     if (typeof window !== "undefined"){
       if (accountCreated) router.replace("/events")
     }
