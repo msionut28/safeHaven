@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import styles from '../home.module.css';
 
-const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
+
 
 const render = (status, markers, onMarkerClick, center, zoom) => {
   switch (status) {
@@ -53,7 +51,8 @@ const MyMapComponent = ({ markers, onMarkerClick, center, zoom }) => {
     });
   }, [markers, onMarkerClick, center, zoom]);
 
-  return <div ref={ref} id="map" style={containerStyle} />;
+  return <div ref={ref} id="map" style={{width: '100%', height: '400px'}} />;
+
 };
 
 
