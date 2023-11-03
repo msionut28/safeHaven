@@ -38,10 +38,10 @@ function AddReview({ venue }) {
             });
 
             if (res.status === 200) {
-                // Handle success
+               
                 alert("Review submitted successfully!");
                 
-                // Call the onReviewSubmit function with the newly submitted review
+                
                 onReviewSubmit(review);
 
                 // Reset the form
