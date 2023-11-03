@@ -11,7 +11,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="bg-slate-900 p-5 flex justify-between items-center shadow-md">
+    <nav className="bg-red-500 p-5 flex justify-between items-center shadow-md">
       <Link href="/"><h1 className="text-white cursor-pointer">SafeHaven</h1></Link>
       <div className="flex gap-5">
         <Link href="/about-us" className="text-white">About Us</Link>

@@ -18,6 +18,8 @@ const customIcon = new L.Icon({
   iconSize: [38, 38]
 });
 
+const backendURL = process.env.BACKEND_URL
+
 function LocationMarkers() {
   const [markers, setMarkers] = useState([]);
 
@@ -45,7 +47,7 @@ function LocationMarkers() {
   useEffect(() => {
     async function fetchMarkers() {
       try {
-        const response = await fetch('http://localhost:4000/markers');
+        const response = await fetch(`${backendURL}/markers`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -65,7 +67,7 @@ function LocationMarkers() {
     console.log(`Marker ${id} text saved: ${markerText}`);
 
     try {
-      const response = await fetch('http://localhost:4000/markers', {
+      const response = await fetch(`${backendURL}/markers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +89,7 @@ function LocationMarkers() {
   };
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4000/markers/${id}`, {
+      const response = await fetch(`${backendURL}/markers/${id}`, {
         method: 'DELETE',
       });
   

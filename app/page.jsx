@@ -69,9 +69,11 @@ export default function Home() {
     }
   };
 
+  const backendURL=process.env.BACKEND_URL
+
   const fetchReviews = async (venue) => {
     try {
-      const res = await fetch(`http://localhost:4000/GetReviews?venue=${venue}`);
+      const res = await fetch(`${backendURL}/GetReviews?venue=${venue}`);
       const data = await res.json();
       setReviews(data.reviews);
       setAverages(data.averages);
@@ -97,7 +99,7 @@ export default function Home() {
 
   const onReviewSubmit = async (newReview) => {
     try {
-      const res = await fetch('http://localhost:4000/AddReview', {
+      const res = await fetch(`${backendURL}/AddReview`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
